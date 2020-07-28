@@ -202,4 +202,41 @@
   .penguin * {
     position: absolute;
   }
+
+  * {padding: 0; margin: 0}
+    img.road {
+        width: 100%;
+        position: relative;
+        top: -85px;
+    }
+    img.car {
+        width: 120px;
+        z-index: 1;
+        top: 90px;
+        position: relative;
+        animation-name: moveCar;
+        animation-iteration-count: infinite;
+        animation-duration: 13s;
+        animation-timing-function: linear;
+        animation-delay: 1s;
+    }
+    img.motor {
+        width: 60px;
+        z-index: 2;
+        top: 100px;
+        position: relative;
+        animation-name: moveMotor;
+        animation-iteration-count: infinite;
+        animation-duration: 13s;
+        animation-timing-function: linear;
+        animation-delay: 1s;
+    }
+    @keyframes moveCar {
+        from {left: -150px}
+        to   {left: 100%;}
+    }
+    @keyframes moveMotor {
+        from {left: 100%;}
+        to   {left: -150px;}
+    }
 </style>
