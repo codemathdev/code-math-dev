@@ -4,47 +4,123 @@
     <meta charset="UTF-8">
     <title>Rahmat Prastyo</title>
 
-    <link rel="stylesheet" href="style/styles.css">
+    <link rel="stylesheet" href="style/pinguin_styles.css">
+    <link rel="stylesheet" href="style/hello_styles.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 </head>
 <body>
+<script>
+var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
 
-    <header>
-        <h1>Rahmat Prastyo</h1>
-        <li>Java Developer</li>
-        <li>Spring Boot</li>
-        <li>Code Math Developer</li>
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
 
-        <div class="penguin">
-            <div class="penguin-bottom">
-                <div class="right-hand"></div>
-                <div class="left-hand"></div>
-                <div class="right-feet"></div>
-                <div class="left-feet"></div>
-            </div>
-            <div class="penguin-top">
-                <div class="right-cheek"></div>
-                <div class="left-cheek"></div>
-                <div class="belly"></div>
-                <div class="right-eye">
-                    <div class="sparkle"></div>
-                </div>
-                <div class="left-eye">
-                    <div class="sparkle"></div>
-                </div>
-                <div class="blush-right"></div>
-                <div class="blush-left"></div>
-                <div class="beak-top"></div>
-                <div class="beak-bottom"></div>
-            </div>
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+
+</script>
+
+    <div>
+        <p class="hello">
+            <a href="" class="typewrite" data-period="2000" data-type='[ "Hi, Im Rahmat Prastyo.","You can call me Rahmat.","I am Creative.", "I Love Coding.", "I Love to Develop." ]'>
+                <span class="wrap"></span>
+            </a>
+        </p >
+    </div>
+
+    <div class="penguin">
+        <div class="penguin-bottom">
+            <div class="right-hand"></div>
+            <div class="left-hand"></div>
+            <div class="right-feet"></div>
+            <div class="left-feet"></div>
         </div>
-    </header>
-    <footer>
-        <img src="assets/image/car.png" class="car">
-        <img src="assets/image/motor.png" class="motor">
-        <img src="assets/image/scane1-jalan.png" class="road">
-    </footer>
+        <div class="penguin-top">
+            <div class="right-cheek"></div>
+            <div class="left-cheek"></div>
+            <div class="belly"></div>
+            <div class="right-eye">
+                <div class="sparkle"></div>
+            </div>
+            <div class="left-eye">
+                <div class="sparkle"></div>
+            </div>
+            <div class="blush-right"></div>
+            <div class="blush-left"></div>
+            <div class="beak-top"></div>
+            <div class="beak-bottom"></div>
+        </div>
+    </div>
 
+
+    <div class="typewriter">
+        <h1>Please Click the Button Below To View My CV.</h1>
+    </div>
+
+    <div class="d-flex justify-content-center" >
+        <a href="/cv_rahmatprastyo">
+            <button class="button"><i class="fas fa-book"></i></button>
+        </a>
+    </div>
+
+
+<!--&lt;!&ndash;        <div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <img src="assets/image/car.png" class="car">&ndash;&gt;-->
+<!--&lt;!&ndash;            <img src="assets/image/motor.png" class="motor">&ndash;&gt;-->
+<!--&lt;!&ndash;            <img src="assets/image/scane1-jalan.png" class="road">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
 
 </body>
 </html>
